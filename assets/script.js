@@ -238,7 +238,7 @@ $("#start").click(function (){
     $(".select").append("<p><button type='button' id='c' class='answers'>"+problems[i].answers.c+"</button></p>");
     $(".select").append("<p><button type='button' id='d' class='answers'>"+problems[i].answers.d+"</button></p>");
     $("#a").on("click", function() {
-        if(i <= 20){i++;}
+        if(i < 20){i++;}
        $("#a").text(problems[i].answers.a)
        $("#b").text(problems[i].answers.b)
        $("#c").text(problems[i].answers.c)
@@ -246,7 +246,7 @@ $("#start").click(function (){
        $("#problem").text(problems[i].question);
      });
     $("#b").on("click", function() {
-        if(i <= 20){i++;}
+        if(i < 20){i++;}
         $("#a").text(problems[i].answers.a)
         $("#b").text(problems[i].answers.b)
         $("#c").text(problems[i].answers.c)
@@ -254,7 +254,7 @@ $("#start").click(function (){
         $("#problem").text(problems[i].question);
      });
      $("#c").on("click", function() {
-        if(i <= 20){i++;}
+        if(i < 20){i++;}
         $("#a").text(problems[i].answers.a)
         $("#b").text(problems[i].answers.b)
         $("#c").text(problems[i].answers.c)
@@ -262,14 +262,14 @@ $("#start").click(function (){
         $("#problem").text(problems[i].question);
      });
      $("#d").on("click", function() {
-        if(i <= 20){i++;}
+        if(i < 20){i++;}
         $("#a").text(problems[i].answers.a)
         $("#b").text(problems[i].answers.b)
         $("#c").text(problems[i].answers.c)
         $("#d").text(problems[i].answers.d) 
         $("#problem").text(problems[i].question);
      });
-        
+        if(i > 0){$(".announcement").animate({visibility: visible});}
         
         
     });

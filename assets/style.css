@@ -23,7 +23,7 @@ body {
 .topleft {
     background-color: white;
     opacity: 90%;
-    height: 400px;
+    height: 600px;
     color: #222;
     border-bottom-style: solid;
     border-bottom-width: 4px;
@@ -57,7 +57,7 @@ body {
 .topright {
     background-color: white;
     opacity: 90%;
-    height: 400px;
+    height: 600px;
     color: #222;
     border-bottom-style: solid;
     border-bottom-width: 4px;
