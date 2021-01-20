@@ -221,23 +221,61 @@ var problems = [
         correctAnswer: "a"
     },
     ]
-
+    var i = 0;
 
 $("#start").click(function (){
-    $("#problem").text(problems[0].question).css("font-size", "24pt");
+    $("#problem").text(problems[i].question).css("font-size", "24pt");
     $("#problem2").text("");
     // $(".select").text("");
     $(".timelabel").text("Time Remaining");
     $("#timer").text("0:00");
     $("#start").css("display", "none");
-    $(".status").text("You will need to select the correct answer or you will have 10 seconds removed from your time.")
-    $("#score").append("Correct: "+ correct +" Incorrect: "+ incorrect)
-    $(".announcement").text("Once you select your first answer the timer will start.").css("visibility", "visible")
-    $(".select").append("<p><button type='button' id='a' class='answers'>"+problems[0].answers.a+"</button></p>")
-    $(".select").append("<p><button type='button' id='b' class='answers'>"+problems[0].answers.b+"</button></p>")
-    $(".select").append("<p><button type='button' id='c' class='answers'>"+problems[0].answers.c+"</button></p>")
-    $(".select").append("<p><button type='button' id='d' class='answers'>"+problems[0].answers.d+"</button></p>")
+    $(".status").text("You will need to select the correct answer or you will have 10 seconds removed from your time.");
+    $("#score").append("Correct: "+ correct +" Incorrect: "+ incorrect);
+    $(".announcement").text("Once you select your first answer the timer will start.").css("visibility", "visible");
+    $(".select").append("<p><button type='button' id='a' class='answers'>"+problems[i].answers.a+"</button></p>");
+    $(".select").append("<p><button type='button' id='b' class='answers'>"+problems[i].answers.b+"</button></p>");
+    $(".select").append("<p><button type='button' id='c' class='answers'>"+problems[i].answers.c+"</button></p>");
+    $(".select").append("<p><button type='button' id='d' class='answers'>"+problems[i].answers.d+"</button></p>");
+    $("#a").on("click", function() {
+        if(i <= 20){i++;}
+       $("#a").text(problems[i].answers.a)
+       $("#b").text(problems[i].answers.b)
+       $("#c").text(problems[i].answers.c)
+       $("#d").text(problems[i].answers.d)
+       $("#problem").text(problems[i].question);
+     });
+    $("#b").on("click", function() {
+        if(i <= 20){i++;}
+        $("#a").text(problems[i].answers.a)
+        $("#b").text(problems[i].answers.b)
+        $("#c").text(problems[i].answers.c)
+        $("#d").text(problems[i].answers.d) 
+        $("#problem").text(problems[i].question);
+     });
+     $("#c").on("click", function() {
+        if(i <= 20){i++;}
+        $("#a").text(problems[i].answers.a)
+        $("#b").text(problems[i].answers.b)
+        $("#c").text(problems[i].answers.c)
+        $("#d").text(problems[i].answers.d) 
+        $("#problem").text(problems[i].question);
+     });
+     $("#d").on("click", function() {
+        if(i <= 20){i++;}
+        $("#a").text(problems[i].answers.a)
+        $("#b").text(problems[i].answers.b)
+        $("#c").text(problems[i].answers.c)
+        $("#d").text(problems[i].answers.d) 
+        $("#problem").text(problems[i].question);
+     });
+        
+        
+        
+    });
 
+
+  
 // function quizBuild() {
 //     var output = [];
 
@@ -318,5 +356,4 @@ $("#start").click(function (){
 // quizBuild();
 
 // submitButton.on("click", onScreen);
-});
-});
+})
