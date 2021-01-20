@@ -2,11 +2,10 @@ $(document).ready(function() {
     $("#problem").text("Welcome to Dev Quiz!");
 $("#problem2").text("This is where your knowledge will be tested.");
 
-// var quizContainer = document.getElementById('quiz');
-// var resultsContainer = document.getElementById('results');
-// var submitButton = document.getElementById('submit');
+var correct = 0;
 var correct = localStorage.getItem("correct")
     if("correct" !== null){correct = 0}
+var incorrect = 0;   
 var incorrect = localStorage.getItem("incorrect")
     if("incorrect" !== null){ incorrect = 0}
 var problems = [
@@ -18,7 +17,7 @@ var problems = [
             c: "<>",
             d: "()"
         },
-        correctAnswer: "a"
+        correctAnswer: "[]"
     },
     {
         question: "How is an object declared? var car = ?",
@@ -28,7 +27,7 @@ var problems = [
             c: "<>",
             d: "()",
         },
-        correctAnswer: "b"
+        correctAnswer: "{}"
     },
     {
         question: "What is a for loop?",
@@ -223,10 +222,39 @@ var problems = [
     ]
     var i = 0;
 
+    var isWaiting = false;
+    var isRunning = false;
+    var seconds = 60;
+    var countdownTimer;
+    var finalCountdown = false;
+    
+    function GameTimer() {
+        var minutes = Math.round((seconds - 30) / 60);
+        var remainingSeconds = seconds % 60;
+        if (remainingSeconds < 10) {
+            remainingSeconds = "0" + remainingSeconds;
+        }
+        document.getElementById('timer').innerHTML = minutes + ":" + remainingSeconds;
+        if (seconds == 0) {
+            isRunning = true;
+            seconds += 0;
+            
+            if (finalCountdown) {
+                clearInterval(countdownTimer);
+            } else {
+                finalCountdown = true;
+            }
+    
+        } else {
+            isWaiting = true;
+            seconds--;
+        }
+    }
+    // countdownTimer = setInterval(GameTimer, 1000);
+
 $("#start").click(function (){
     $("#problem").text(problems[i].question).css("font-size", "24pt");
     $("#problem2").text("");
-    // $(".select").text("");
     $(".timelabel").text("Time Remaining");
     $("#timer").text("0:00");
     $("#start").css("display", "none");
@@ -238,40 +266,52 @@ $("#start").click(function (){
     $(".select").append("<p><button type='button' id='c' class='answers'>"+problems[i].answers.c+"</button></p>");
     $(".select").append("<p><button type='button' id='d' class='answers'>"+problems[i].answers.d+"</button></p>");
     $("#a").on("click", function() {
-        if(i < 20){i++;}
-       $("#a").text(problems[i].answers.a)
-       $("#b").text(problems[i].answers.b)
-       $("#c").text(problems[i].answers.c)
-       $("#d").text(problems[i].answers.d)
-       $("#problem").text(problems[i].question);
+        if(problems[i].answers.a == problems[i].correctAnswer && i < 20){
+            correct++;
+            i++;
+            $("#a").text(problems[i].answers.a);
+            $("#b").text(problems[i].answers.b);
+            $("#c").text(problems[i].answers.c);
+            $("#d").text(problems[i].answers.d);
+            $("#problem").text(problems[i].question);
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
+        else{incorrect++;
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
      });
     $("#b").on("click", function() {
-        if(i < 20){i++;}
-        $("#a").text(problems[i].answers.a)
-        $("#b").text(problems[i].answers.b)
-        $("#c").text(problems[i].answers.c)
-        $("#d").text(problems[i].answers.d) 
-        $("#problem").text(problems[i].question);
+        if(problems[i].answers.b == problems[i].correctAnswer && i < 20){
+            correct++;
+            i++;
+            $("#a").text(problems[i].answers.a);
+            $("#b").text(problems[i].answers.b);
+            $("#c").text(problems[i].answers.c);
+            $("#d").text(problems[i].answers.d);
+            $("#problem").text(problems[i].question);
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
+        else{incorrect++;
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
      });
      $("#c").on("click", function() {
         if(i < 20){i++;}
-        $("#a").text(problems[i].answers.a)
-        $("#b").text(problems[i].answers.b)
-        $("#c").text(problems[i].answers.c)
-        $("#d").text(problems[i].answers.d) 
+        $("#a").text(problems[i].answers.a);
+        $("#b").text(problems[i].answers.b);
+        $("#c").text(problems[i].answers.c);
+        $("#d").text(problems[i].answers.d); 
         $("#problem").text(problems[i].question);
      });
      $("#d").on("click", function() {
         if(i < 20){i++;}
-        $("#a").text(problems[i].answers.a)
-        $("#b").text(problems[i].answers.b)
-        $("#c").text(problems[i].answers.c)
-        $("#d").text(problems[i].answers.d) 
+        $("#a").text(problems[i].answers.a);
+        $("#b").text(problems[i].answers.b);
+        $("#c").text(problems[i].answers.c);
+        $("#d").text(problems[i].answers.d); 
         $("#problem").text(problems[i].question);
      });
-        if(i > 0){$(".announcement").animate({visibility: visible});}
-        
-        
+     for (var j = 0; j < problems.length; j++) {
+        if(correct == 1 || incorrect == 1){$(".announcement").css("visibility", "hidden");
+        countdownTimer = setInterval(GameTimer, 1000);}
+         
+     }
     });
 
 
