@@ -3,13 +3,13 @@ $(document).ready(function() {
 $("#problem2").text("This is where your knowledge will be tested.");
 
 var correct = 0;
-var wins = 0;
+
 var wins = localStorage.getItem("wins")
-    if("wins" !== null){correct = 0}
+    if("wins" !== null){wins = 0}
 var incorrect = 0;   
-var losses = 0;
+
 var losses = localStorage.getItem("losses")
-    if("losses" !== null){ incorrect = 0}
+    if("losses" !== null){ losses = 0}
 var problems = [
     {
         question: "How is an array declared? var tacos = ?",
@@ -235,16 +235,20 @@ var problems = [
         $("#b").text("for playing")
         $("#c").text("this little game!")
         $("#d").text("Come again!")
-        if (correct <= 16){$("#problems").text("Congratulations! You've won!").css("font-size", "32pt");
+        if (correct >= 16){$("#problem").text("Congratulations! You've won!").css("font-size", "32pt");
             $("#problem2").text("If you would like to try again please refresh the page.")
             wins++;
             localStorage.setItem("wins", wins);
-            localStorage.setItem("losses", losses);}
-        else {$("#problem").text("Unfortunately you've failed. Please study more.").css("font-size", "32pt");
+            localStorage.setItem("losses", losses);
+            $("#wins").empty();
+            $("#wins").append("Wins: "+ wins +" Losses: "+ losses);}
+            else {$("#problem").text("Oh no!. Please study more.").css("font-size", "32pt");
                 $("#problem2").text("If you would like to try again please refresh the page.")
                 losses++;
                 localStorage.setItem("wins", wins);
-                localStorage.setItem("losses", losses);}
+                localStorage.setItem("losses", losses);
+                $("#wins").empty();
+                $("#wins").append("Wins: "+ wins +" Losses: "+ losses);}
     }
     function GameTimer() {
         var minutes = Math.round((seconds - 30) / 60);
@@ -278,6 +282,7 @@ $("#start").click(function (){
     $("#start").css("display", "none");
     $(".status").text("You will need to select the correct answer or you will have 10 seconds removed from your time.");
     $("#score").append("Correct: "+ correct +" Incorrect: "+ incorrect);
+    $("#wins").append("Wins: "+wins+" Losses: "+losses);
     $(".announcement").text("Once you select your first answer the timer will start.").css("visibility", "visible");
     $(".select").append("<p><button type='button' id='a' class='answers'>"+problems[i].answers.a+"</button></p>");
     $(".select").append("<p><button type='button' id='b' class='answers'>"+problems[i].answers.b+"</button></p>");
@@ -341,87 +346,5 @@ $("#start").click(function (){
          
      
     });
-
-
-  
-// function quizBuild() {
-//     var output = [];
-
-//     problems.forEach(
-//         (currentQuestion, questionNumber) => {
-//             var answers = [];
-//             for(letter in currentQuestion.answers){
-//                 answers.push(
-//                     `<label>
-//                      <input type="radio" name="question${questionNumber}" value="${letter}">
-//                      ${letter} :
-//                     ${currentQuestion.answers[letter]}
-//                     </label>`
-//                 );
-//             }
-//             output.push(
-//                 `<div class="question"> ${currentQuestion.question} </div>
-//                     <div class="answers"> ${answers.join('')} </div>`
-//             );
-//         }
-//     );
-//     quizContainer.innerHTML = output.join('');
-// }
-// problems.forEach((currentQuestion, questionNumber) => {
-//     var answers = [];
-//     for(letter in currentQuestion.answers){
-//         answers.push(
-//             `<label>
-//             <input type="radio" name="question${questionNumber}" value="${letter}">
-//             ${letter} :
-//             ${currentQuestion.answers[letter]}
-//             </label>` 
-//         );
-//     }
-//     output.push(
-//         `<div class="question"> ${currentQuestion.question} </div>
-//         <div class="answers"> ${answers.join('')} </div>`  
-//     );
-//     quizContainer.innerHTML = output.join('');
-// });
-
-// function onScreen() {
-//     var answerContainers = quizContainer.querySelectorAll('.answers');
-//     var numCorrect = 0;
-//     problems.forEach( (currentQuestion, questionNumber) => {
-
-//         var answerContainer = answerContainers[questionNumber];
-//         var selector = 'input[name=question${questionNumer}]:checked';
-//         var userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
-//         if(userAnswer === currentQuestion.correctAnswer){
-//             numCorrect++;
-//             answerContainers[questionNumber].style.color = 'lightgreen';
-//         }
-//         else{
-//             answerContainers[questionNumber].style.color = 'red';
-//         }
-//     });
-//     resultsContainer.innerHTML = '${numCorrect} out of ${problems.length}';
-// }
-// var answerContainers = quizContainer.querySelectorAll('.answers');
-// var numCorrect = 0;
-
-// problems.forEach( (currentQuestion, questionNumber) => {
-//     var answerContainer = answerContainers[questionNumber];
-//     var selector = 'input[name=question${questionNumber}]:checked';
-//     var userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
-//     if(userAnswer === currentQuestion.correctAnswer){
-//         numCorrect++;
-//         answerContainers[questionNumber].style.color = 'lightgreen';
-//     }
-//     else{
-//         answerContainers[questionNumber].style.color = 'red';
-//     }
-// });
-
-// quizBuild();
-
-// submitButton.on("click", onScreen);
+ 
 })

@@ -102,6 +102,11 @@ body {
     font-weight: bolder;
     text-align: center;
 }
+#wins {
+    text-align: center;
+    font-size: 20pt;
+    font-weight: bold;
+}
 .bottomright {
     background-color: white;
     opacity: 90%;
