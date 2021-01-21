@@ -1,15 +1,13 @@
 $(document).ready(function() {
     $("#problem").text("Welcome to Dev Quiz!");
-$("#problem2").text("This is where your knowledge will be tested.");
+    $("#problem2").text("This is where your knowledge will be tested.");
 
 var correct = 0;
-
-var wins = localStorage.getItem("wins")
-    if("wins" !== null){wins = 0}
 var incorrect = 0;   
-
+var wins = localStorage.getItem("wins")
+    if("wins" == null){wins = 0}
 var losses = localStorage.getItem("losses")
-    if("losses" !== null){ losses = 0}
+    if("losses" == null){ losses = 0}
 var problems = [
     {
         question: "How is an array declared? var tacos = ?",
@@ -222,58 +220,52 @@ var problems = [
         correctAnswer: "a function declared inside an object"
     },
     ]
-    var i = 0;
-
-    var isWaiting = false;
-    var isRunning = false;
-    var seconds = 60;
-    var countdownTimer;
-    var finalCountdown = false;
-    function finished() {
-        $("#problem").empty()
-        $("#a").text("Thank You")
-        $("#b").text("for playing")
-        $("#c").text("this little game!")
-        $("#d").text("Come again!")
-        if (correct >= 16){$("#problem").text("Congratulations! You've won!").css("font-size", "32pt");
-            $("#problem2").text("If you would like to try again please refresh the page.")
-            wins++;
-            localStorage.setItem("wins", wins);
-            localStorage.setItem("losses", losses);
-            $("#wins").empty();
-            $("#wins").append("Wins: "+ wins +" Losses: "+ losses);}
-            else {$("#problem").text("Oh no!. Please study more.").css("font-size", "32pt");
-                $("#problem2").text("If you would like to try again please refresh the page.")
-                losses++;
-                localStorage.setItem("wins", wins);
-                localStorage.setItem("losses", losses);
-                $("#wins").empty();
-                $("#wins").append("Wins: "+ wins +" Losses: "+ losses);}
+var i = 0;
+var isWaiting = false;
+var isRunning = false;
+var seconds = 60;
+var countdownTimer;
+var finalCountdown = false;
+    
+function finished() {
+    clearInterval(countdownTimer)
+    $("#problem").empty()
+    $("#a").text("Thank You")
+    $("#b").text("for playing")
+    $("#c").text("this little game!")
+    $("#d").text("Come again!")
+    if (correct >= 16){$("#problem").text("Congratulations! You've won!").css("font-size", "32pt");
+        $("#problem2").text("If you would like to try again please refresh the page.")
+        wins++;
+        localStorage.setItem("wins", wins);
+        localStorage.setItem("losses", losses);
+        $("#wins").empty();
+        $("#wins").append("Wins: "+ wins +" Losses: "+ losses);}
+    else {$("#problem").text("Oh no!. Please study more.").css("font-size", "32pt");
+        $("#problem2").text("If you would like to try again please refresh the page.")
+        losses++;
+        localStorage.setItem("wins", wins);
+        localStorage.setItem("losses", losses);
+        $("#wins").empty();
+        $("#wins").append("Wins: "+ wins +" Losses: "+ losses);}
     }
-    function GameTimer() {
-        var minutes = Math.round((seconds - 30) / 60);
-        var remainingSeconds = seconds % 60;
+ function GameTimer() {
+    var minutes = Math.round((seconds - 30) / 60);
+    var remainingSeconds = seconds % 60;
         if (remainingSeconds < 10) {
             remainingSeconds = "0" + remainingSeconds;
         }
-        document.getElementById('timer').innerHTML = minutes + ":" + remainingSeconds;
+    document.getElementById('timer').innerHTML = minutes + ":" + remainingSeconds;
         if (seconds == 0) {
             isRunning = true;
             finished();
             
             if (finalCountdown) {
-                clearInterval(countdownTimer);
-            } else {
-                finalCountdown = true;
-            }
-    
-        } else {
-            isWaiting = true;
-            seconds--;
-        }
+                (countdownTimer);} 
+            else {finalCountdown = true;}} 
+        else {isWaiting = true;
+            seconds--;}
     }
-    // countdownTimer = setInterval(GameTimer, 1000);
-
 $("#start").click(function (){
     $("#problem").text(problems[i].question).css("font-size", "24pt");
     $("#problem2").text("");
@@ -283,7 +275,6 @@ $("#start").click(function (){
     $(".status").text("You will need to select the correct answer or you will have 10 seconds removed from your time.");
     $("#score").append("Correct: "+ correct +" Incorrect: "+ incorrect);
     $("#wins").append("Wins: "+wins+" Losses: "+losses);
-    $(".announcement").text("Once you select your first answer the timer will start.").css("visibility", "visible");
     $(".select").append("<p><button type='button' id='a' class='answers'>"+problems[i].answers.a+"</button></p>");
     $(".select").append("<p><button type='button' id='b' class='answers'>"+problems[i].answers.b+"</button></p>");
     $(".select").append("<p><button type='button' id='c' class='answers'>"+problems[i].answers.c+"</button></p>");
@@ -299,9 +290,21 @@ $("#start").click(function (){
             $("#d").text(problems[i].answers.d);
             $("#problem").text(problems[i].question);
             $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
-        else{incorrect++;
+        else if (problems[i].answers.a != problems[i].correctAnswer && i < 20){
+            incorrect++;
+            i++;
+            $("#a").text(problems[i].answers.a);
+            $("#b").text(problems[i].answers.b);
+            $("#c").text(problems[i].answers.c);
+            $("#d").text(problems[i].answers.d);
+            $("#problem").text(problems[i].question);
             $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);
             seconds--;}
+        else if (problems[i].answers.a == problems[i].correctAnswer && i === 20){
+                seconds = 0;}
+        else if (problems[i].answers.a != problems[i].correctAnswer && i === 20){
+            seconds = 0;}
+        else if (incorrect = 20){seconds = 0;}
      });
     $("#b").on("click", function() {
         if(problems[i].answers.b == problems[i].correctAnswer && i < 20){
@@ -313,9 +316,22 @@ $("#start").click(function (){
             $("#d").text(problems[i].answers.d);
             $("#problem").text(problems[i].question);
             $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
-        else{incorrect++;
-            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
-     });
+        else if (problems[i].answers.b != problems[i].correctAnswer && i < 20){
+            incorrect++;
+            i++;
+            $("#a").text(problems[i].answers.a);
+            $("#b").text(problems[i].answers.b);
+            $("#c").text(problems[i].answers.c);
+            $("#d").text(problems[i].answers.d);
+            $("#problem").text(problems[i].question);
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);
+            seconds--;}
+        else if (problems[i].answers.b == problems[i].correctAnswer && i === 20){
+            seconds = 0;}
+        else if (problems[i].answers.b != problems[i].correctAnswer && i === 20){
+            seconds = 0;}
+        else if (incorrect = 20){seconds = 0;}
+        });
      $("#c").on("click", function() {
         if(problems[i].answers.c == problems[i].correctAnswer && i < 20){
             correct++;
@@ -326,9 +342,22 @@ $("#start").click(function (){
             $("#d").text(problems[i].answers.d); 
             $("#problem").text(problems[i].question);
             $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
-        else{incorrect++;
-            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
-     });
+        else if (problems[i].answers.c != problems[i].correctAnswer && i < 20){
+            incorrect++;
+            i++;
+            $("#a").text(problems[i].answers.a);
+            $("#b").text(problems[i].answers.b);
+            $("#c").text(problems[i].answers.c);
+            $("#d").text(problems[i].answers.d);
+            $("#problem").text(problems[i].question);
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);
+            seconds--;}
+        else if (problems[i].answers.c == problems[i].correctAnswer && i === 20){
+            seconds = 0;}
+        else if (problems[i].answers.c == problems[i].correctAnswer && i === 20){
+            seconds = 0;}
+        else if (incorrect = 20){seconds = 0;}
+        });
      $("#d").on("click", function() {
         if(problems[i].answers.d == problems[i].correctAnswer && i < 20){
             correct++;
@@ -339,9 +368,22 @@ $("#start").click(function (){
             $("#d").text(problems[i].answers.d); 
             $("#problem").text(problems[i].question);
             $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
-        else{incorrect++;
-            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
-     });
+        else if (problems[i].answers.d != problems[i].correctAnswer && i < 20){
+            incorrect++;
+            i++;
+            $("#a").text(problems[i].answers.a);
+            $("#b").text(problems[i].answers.b);
+            $("#c").text(problems[i].answers.c);
+            $("#d").text(problems[i].answers.d);
+            $("#problem").text(problems[i].question);
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);
+            seconds--;}
+        else if (problems[i].answers.d == problems[i].correctAnswer && i === 20){
+            seconds = 0;}
+        else if (problems[i].answers.d == problems[i].correctAnswer && i === 20){
+            seconds = 0;}
+        else if (incorrect = 20){seconds = 0;}
+        });
 
          
      
