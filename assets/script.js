@@ -44,7 +44,7 @@ var problems = [
         answers:{
             a: "what you do while you wait for someone shopping",
             b: "loops through a block of code a number of times",
-            c: "when you drive around the neighborhood instead of driving straight home",
+            c: "when you drive around the neighborhood",
             d: "loops through a block of code while a specified condition is true",
         },
         correctAnswer: "loops through a block of code while a specified condition is true"
@@ -267,7 +267,7 @@ function finished() {
             seconds--;}
     }
 $("#start").click(function (){
-    $("#problem").text(problems[i].question).css("font-size", "24pt");
+    $("#problem").text(problems[i].question);
     $("#problem2").text("");
     $(".timelabel").text("Time Remaining");
     $("#timer").text("0:00");
