@@ -312,24 +312,32 @@ $("#start").click(function (){
             $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
      });
      $("#c").on("click", function() {
-        if(i < 20){i++;}
-        $("#a").text(problems[i].answers.a);
-        $("#b").text(problems[i].answers.b);
-        $("#c").text(problems[i].answers.c);
-        $("#d").text(problems[i].answers.d); 
-        $("#problem").text(problems[i].question);
+        if(problems[i].answers.c == problems[i].correctAnswer && i < 20){
+            correct++;
+            i++;
+            $("#a").text(problems[i].answers.a);
+            $("#b").text(problems[i].answers.b);
+            $("#c").text(problems[i].answers.c);
+            $("#d").text(problems[i].answers.d); 
+            $("#problem").text(problems[i].question);
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
+        else{incorrect++;
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
      });
      $("#d").on("click", function() {
-        if(i < 20){i++;}
-        $("#a").text(problems[i].answers.a);
-        $("#b").text(problems[i].answers.b);
-        $("#c").text(problems[i].answers.c);
-        $("#d").text(problems[i].answers.d); 
-        $("#problem").text(problems[i].question);
+        if(problems[i].answers.d == problems[i].correctAnswer && i < 20){
+            correct++;
+            i++;
+            $("#a").text(problems[i].answers.a);
+            $("#b").text(problems[i].answers.b);
+            $("#c").text(problems[i].answers.c);
+            $("#d").text(problems[i].answers.d); 
+            $("#problem").text(problems[i].question);
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
+        else{incorrect++;
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
      });
-     while (i > 0) {
-        if(correct == 1 || incorrect == 1){$(".announcement").css("visibility", "hidden");
-        countdownTimer = setInterval(GameTimer, 1000);}
+
          
      }
     });
