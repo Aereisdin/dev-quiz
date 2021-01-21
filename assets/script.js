@@ -272,7 +272,7 @@ $("#start").click(function (){
     $(".timelabel").text("Time Remaining");
     $("#timer").text("0:00");
     $("#start").css("display", "none");
-    $(".status").text("You will need to select the correct answer or you will have 10 seconds removed from your time.");
+    $(".status").text("You will need to select the correct answer or you will have 1 seconds removed from your time.");
     $("#score").append("Correct: "+ correct +" Incorrect: "+ incorrect);
     $("#wins").append("Wins: "+wins+" Losses: "+losses);
     $(".select").append("<p><button type='button' id='a' class='answers'>"+problems[i].answers.a+"</button></p>");
