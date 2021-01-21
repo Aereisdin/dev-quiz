@@ -39,7 +39,7 @@ var problems = [
             c: "a round circle with four parts",
             d: "a hairy hulahoop",
         },
-        correctAnswer: "a"
+        correctAnswer: "loops through a block of code a number of times"
     },
     {
         question: "What is a while loop?",
@@ -49,7 +49,7 @@ var problems = [
             c: "when you drive around the neighborhood instead of driving straight home",
             d: "loops through a block of code while a specified condition is true",
         },
-        correctAnswer: "d"
+        correctAnswer: "loops through a block of code while a specified condition is true"
     },
     {
         question: "What is a do loop?",
@@ -59,7 +59,7 @@ var problems = [
             c: "similar to a while loop but runs at least once",
             d: "loops that are loopy in that weird direct way",
         },
-        correctAnswer: "c"
+        correctAnswer: "similar to a while loop but runs at least once"
     },
     {
         question: "How do you select something in JQuery?",
@@ -69,7 +69,7 @@ var problems = [
             c: "@{}",
             d: "&<>",
         },
-        correctAnswer: "a"
+        correctAnswer: "$()"
     },
     {
         question: "What is the DOM?",
@@ -79,7 +79,7 @@ var problems = [
             c: "Dog Object Maker",
             d: "Document Object Model",
         },
-        correctAnswer: "d"
+        correctAnswer: "Document Object Model"
     },
     {
         question: "What is the Window?",
@@ -89,17 +89,17 @@ var problems = [
             c: "a reference to the browser display",
             d: "the monitor",
         },
-        correctAnswer: "c"
+        correctAnswer: "a reference to the browser display"
     },
     {
         question: "What is the difference between === and ==?",
         answers:{
-            a: "b & d",
+            a: "2nd option & 4th option",
             b: "== compares only values",
             c: "there is no difference",
             d: "=== compares values and data types",
         },
-        correctAnswer: "a"
+        correctAnswer: "2nd option & 4th option"
     },
     {
         question: "What does ES6 stand for?",
@@ -109,7 +109,7 @@ var problems = [
             c: "Environment Salvaging 6",
             d: "ECMA Script 6",
         },
-        correctAnswer: "d"
+        correctAnswer: "ECMA Script 6"
     },
     {
         question: "What is a callback?",
@@ -119,7 +119,7 @@ var problems = [
             c: "a phone call notifying you that you got the job",
             d: "the French word meaning to call someone back",
         },
-        correctAnswer: "b"
+        correctAnswer: "a function passed as an argument to another function"
     },
     {
         question: "How do you declare a function?",
@@ -129,7 +129,7 @@ var problems = [
             c: "$()",
             d: "you address a gathering in welcome",
         },
-        correctAnswer: "b"
+        correctAnswer: "function name(){}"
     },
     {
         question: "What is the most popular Javascript library?",
@@ -139,7 +139,7 @@ var problems = [
             c: "jQuery",
             d: "Python",
         },
-        correctAnswer: "c"
+        correctAnswer: "jQuery"
     },
     {
         question: "Which of these is Camel Case?",
@@ -149,7 +149,7 @@ var problems = [
             c: "Camelcase",
             d: "camelCase",
         },
-        correctAnswer: "d"
+        correctAnswer: "camelCase"
     },
     {
         question: "What is let in Javascript?",
@@ -159,7 +159,7 @@ var problems = [
             c: "a variable that cannot be updated or re-declared",
             d: "a variable that loves lattes",
         },
-        correctAnswer: "a"
+        correctAnswer: "a variable that only be updated not re-declared"
     },
     {
         question: "What is const in Javascript?",
@@ -169,7 +169,7 @@ var problems = [
             c: "a variable that cannot be updated or re-declared",
             d: "a variable that may be a bit bound up",
         },
-        correctAnswer: "c"
+        correctAnswer: "a variable that cannot be updated or re-declared"
     },
     {
         question: "What is calling a function?",
@@ -179,7 +179,7 @@ var problems = [
             c: "making a function with a name",
             d: "deciding to hold a party",
         },
-        correctAnswer: "a"
+        correctAnswer: "typing the name of the function & ()"
     },
     {
         question: "What are function arguments?",
@@ -189,7 +189,7 @@ var problems = [
             c: "a value or values",
             d: "real values passed to and received by the function",
         },
-        correctAnswer: "d"
+        correctAnswer: "real values passed to and received by the function"
     },
     {
         question: "What is a local variable?",
@@ -199,7 +199,7 @@ var problems = [
             c: "a variable declared inside a function",
             d: "weather",
         },
-        correctAnswer: "c"
+        correctAnswer: "a variable declared inside a function"
     },
     {
         question: "What is an event?",
@@ -209,7 +209,7 @@ var problems = [
             c: "when a famous person does something",
             d: "when your mother is wrong",
         },
-        correctAnswer: "a"
+        correctAnswer: "when the user or the browser manipulated the page"
     },
     {
         question: "What is an object method?",
@@ -219,7 +219,7 @@ var problems = [
             c: "a way by which toast lands butter side up",
             d: "functionally objectable material",
         },
-        correctAnswer: "a"
+        correctAnswer: "a function declared inside an object"
     },
     ]
     var i = 0;
@@ -255,7 +255,7 @@ var problems = [
         document.getElementById('timer').innerHTML = minutes + ":" + remainingSeconds;
         if (seconds == 0) {
             isRunning = true;
-            seconds += 0;
+            finished();
             
             if (finalCountdown) {
                 clearInterval(countdownTimer);
@@ -339,7 +339,7 @@ $("#start").click(function (){
      });
 
          
-     }
+     
     });
 
 
