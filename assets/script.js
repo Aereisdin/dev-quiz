@@ -241,7 +241,7 @@ function finished() {
         localStorage.setItem("losses", losses);
         $("#wins").empty();
         $("#wins").append("Wins: "+ wins +" Losses: "+ losses);}
-    else {$("#problem").text("Oh no!. Please study more.").css("font-size", "32pt");
+    else {$("#problem").text("Oh no! Please study more").css("font-size", "32pt");
         $("#problem2").text("If you would like to try again please refresh the page.")
         losses++;
         localStorage.setItem("wins", wins);
