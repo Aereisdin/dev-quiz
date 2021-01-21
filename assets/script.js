@@ -3,11 +3,13 @@ $(document).ready(function() {
 $("#problem2").text("This is where your knowledge will be tested.");
 
 var correct = 0;
-var correct = localStorage.getItem("correct")
-    if("correct" !== null){correct = 0}
+var wins = 0;
+var wins = localStorage.getItem("wins")
+    if("wins" !== null){correct = 0}
 var incorrect = 0;   
-var incorrect = localStorage.getItem("incorrect")
-    if("incorrect" !== null){ incorrect = 0}
+var losses = 0;
+var losses = localStorage.getItem("losses")
+    if("losses" !== null){ incorrect = 0}
 var problems = [
     {
         question: "How is an array declared? var tacos = ?",
@@ -227,7 +229,23 @@ var problems = [
     var seconds = 60;
     var countdownTimer;
     var finalCountdown = false;
-    
+    function finished() {
+        $("#problem").empty()
+        $("#a").text("Thank You")
+        $("#b").text("for playing")
+        $("#c").text("this little game!")
+        $("#d").text("Come again!")
+        if (correct <= 16){$("#problems").text("Congratulations! You've won!").css("font-size", "32pt");
+            $("#problem2").text("If you would like to try again please refresh the page.")
+            wins++;
+            localStorage.setItem("wins", wins);
+            localStorage.setItem("losses", losses);}
+        else {$("#problem").text("Unfortunately you've failed. Please study more.").css("font-size", "32pt");
+                $("#problem2").text("If you would like to try again please refresh the page.")
+                losses++;
+                localStorage.setItem("wins", wins);
+                localStorage.setItem("losses", losses);}
+    }
     function GameTimer() {
         var minutes = Math.round((seconds - 30) / 60);
         var remainingSeconds = seconds % 60;
@@ -265,6 +283,7 @@ $("#start").click(function (){
     $(".select").append("<p><button type='button' id='b' class='answers'>"+problems[i].answers.b+"</button></p>");
     $(".select").append("<p><button type='button' id='c' class='answers'>"+problems[i].answers.c+"</button></p>");
     $(".select").append("<p><button type='button' id='d' class='answers'>"+problems[i].answers.d+"</button></p>");
+    countdownTimer = setInterval(GameTimer, 1000);
     $("#a").on("click", function() {
         if(problems[i].answers.a == problems[i].correctAnswer && i < 20){
             correct++;
@@ -276,7 +295,8 @@ $("#start").click(function (){
             $("#problem").text(problems[i].question);
             $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
         else{incorrect++;
-            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);}
+            $("#score").empty().append("Correct: "+ correct +" Incorrect: "+ incorrect);
+            seconds--;}
      });
     $("#b").on("click", function() {
         if(problems[i].answers.b == problems[i].correctAnswer && i < 20){
@@ -307,7 +327,7 @@ $("#start").click(function (){
         $("#d").text(problems[i].answers.d); 
         $("#problem").text(problems[i].question);
      });
-     for (var j = 0; j < problems.length; j++) {
+     while (i > 0) {
         if(correct == 1 || incorrect == 1){$(".announcement").css("visibility", "hidden");
         countdownTimer = setInterval(GameTimer, 1000);}
          
