@@ -248,19 +248,10 @@ function finished() {
         localStorage.setItem("losses", losses);
         $("#wins").empty();
         $("#wins").append("Wins: "+ wins +" Losses: "+ losses);}
-    $("#names").css("visibility", "visible")
-    $(".names").css("visibility", "visible")
+    // $("#names").css("visibility", "visible")
+    // $(".names").css("visibility", "visible")
     }
 
-// $(".names").keydown(function(event){
-//     if (event.which == 13) {
-//         var namescore = $(".names").val()+"Wins:"+wins+"Losses"+losses;
-//         localStorage.setItem("namescore", namescore);
-//         this.form.submit();
-//      }
-    
-// console.log(namescore)    
-});
 
  function GameTimer() {
     var minutes = Math.round((seconds - 30) / 60);
